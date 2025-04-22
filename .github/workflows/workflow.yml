@@ -33,13 +33,20 @@ jobs:
       - name: run linter
         run: make lint
 
+      # Publish code coverage on qlty.sh
+      - name: Run test & publish code coverage
+        uses: qltysh/qlty-action/coverage@v1
+        with:
+          token: {{secrets.QLTY_COVERAGE_TOKEN}}
+          files: coverage/clover.xml
+
       # Publish code coverage on Code Climate
       # https://github.com/paambaati/codeclimate-action
-      #- name: Run test & publish code coverage
+      # - name: Run test & publish code coverage
       #  uses: paambaati/codeclimate-action@v5
-      #   Add Code Climate secret key
+      # Add Code Climate secret key
       #  env:
-      #    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #    QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
       #  with:
       #    coverageCommand: make test-coverage
       #    coverageLocations: build/logs/clover.xml:clover
