@@ -1,6 +1,15 @@
 start:
 	php artisan serve --host 0.0.0.0
 
+install: # команда полезна при первом клонировании репозитория (или после удаления зависимостей)
+	composer install
+
+update: # обновить зависимости
+	composer update
+
+validate: # проверяет файл composer.json на ошибки
+	composer validate
+
 start-frontend:
 	npm run dev
 
