@@ -46,10 +46,10 @@ deploy:
 	git push heroku
 
 lint:
-	composer phpcs
+	composer exec --verbose phpcs -- --standard=PSR12 app tests # ./vendor/bin/phpcs
 
 lint-fix:
-	composer phpcbf
+	composer exec --verbose phpcbf -- --standard=PSR12 app tests # ./vendor/bin/phpcbf
 
 compose:
 	docker-compose up
