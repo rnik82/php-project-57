@@ -29,6 +29,9 @@ jobs:
       - name: validate
         run: composer validate
 
+      - name: Copy .env
+        run: cp .env.example .env
+
       # Генерация ключа приложения (application encryption key)
       - name: Generate APP_KEY
         run: php artisan key:generate
