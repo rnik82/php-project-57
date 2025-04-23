@@ -36,6 +36,14 @@ jobs:
       - name: Generate APP_KEY
         run: php artisan key:generate
 
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          echo "APP_ENV=testing" >> .env
+          mkdir -p public/build
+          echo '{}' > public/build/manifest.json
+
       # Запуск тестов
       - name: run tests
         run: make test
