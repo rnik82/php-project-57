@@ -1,5 +1,5 @@
 start:
-	php artisan serve --host 0.0.0.0
+	php artisan serve
 
 install: # команда полезна при первом клонировании репозитория (или после удаления зависимостей)
 	composer install
@@ -46,10 +46,10 @@ deploy:
 	git push heroku
 
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 app # ./vendor/bin/phpcs
+	composer exec --verbose phpcs -- --standard=PSR12 app
 
 lint-fix:
-	composer exec --verbose phpcbf -- --standard=PSR12 app # ./vendor/bin/phpcbf
+	composer exec --verbose phpcbf -- --standard=PSR12 app
 
 compose:
 	docker-compose up

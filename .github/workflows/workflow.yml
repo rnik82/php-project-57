@@ -29,6 +29,10 @@ jobs:
       - name: validate
         run: composer validate
 
+      # Запуск тестов
+      - name: run tests
+        run: make test
+
       # Запуск линтера
       - name: run linter
         run: make lint
