@@ -29,6 +29,10 @@ jobs:
       - name: validate
         run: composer validate
 
+      # Генерация ключа приложения (application encryption key)
+      - name: Generate APP_KEY
+        run: php artisan key:generate
+
       # Запуск тестов
       - name: run tests
         run: make test
