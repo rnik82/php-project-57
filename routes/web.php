@@ -7,17 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test-email', function() {
-    Mail::to('test@example.com')->send(new \App\Mail\TestMail());
-    return 'Email sent!';
-});
-
-// Протестировать flash
-//Route::get('/test-flash', function() {
-//    flash('Тестовое сообщение!')->success();
-//    return redirect('/');
-//});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
