@@ -27,15 +27,13 @@
                         <td>{{$status->created_at}}</td>
                         <td class="align-middle">
                             <div class="inline-flex items-baseline space-x-1">
-                                <td>
-                                    {{ html()->a(route('task_statuses.destroy', $status->id), 'Удалить')
-                                        ->class('text-red-600 hover:text-red-900')
-                                        ->data('method', 'delete')
-                                        ->data('confirm', 'Вы уверены?') }}
+                                {{ html()->a(route('task_statuses.destroy', $status->id), 'Удалить')
+                                    ->class('text-red-600 hover:text-red-900')
+                                    ->data('method', 'delete')
+                                    ->data('confirm', 'Вы уверены?') }}
 
-                                    {{ html()->a(route('task_statuses.edit', $status->id), 'Изменить')
-                                        ->class('text-blue-600 hover:text-blue-900') }}
-                                </td>
+                                {{ html()->a(route('task_statuses.edit', $status->id), 'Изменить')
+                                    ->class('text-blue-600 hover:text-blue-900') }}
                             </div>
                         </td>
                     </tr>
