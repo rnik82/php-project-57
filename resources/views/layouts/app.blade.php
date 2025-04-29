@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
+    <!-- Tailwind CSS
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
     <title>Менеджер задач</title>
 
@@ -25,15 +28,8 @@
 <body>
     <div id="app">
         @include('partials.header')
-        <main class="container main-content" style="padding-top: 10px;">
-            <!-- flash-сообщения -->
+        <main class="max-w-screen-xl mx-auto px-4 pt-4">
             @include('flash::message')
-            {{-- @if(session('flash.message'))
-                <div class="alert alert-{{ session('flash.level') }}">
-                    {{ session('flash.message') }}
-                </div>
-            @endif --}}
-
             @yield('content')
         </main>
     </div>

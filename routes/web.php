@@ -11,7 +11,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('tasks', TaskController::class);
-Route::resource('task_statuses', TaskStatusController::class);
+Route::resource('task_statuses', TaskStatusController::class)->only(['index', 'show']);
 Route::resource('labels', LabelController::class);
 
 Route::get('/dashboard', function () {
@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // сделаем так, чтобы добавлять, редактировать и удалять статусы могли бы только залогиненные пользователи
+    Route::resource('task_statuses', TaskStatusController::class)->except(['index', 'show']);
 });
 
 require __DIR__.'/auth.php';
