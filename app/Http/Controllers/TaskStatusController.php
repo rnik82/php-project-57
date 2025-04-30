@@ -65,7 +65,6 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        //$article = Article::findOrFail($id);
         $data = $request->validate([
             // У обновления немного измененная валидация
             // В проверку уникальности добавляется название поля и id текущего объекта
