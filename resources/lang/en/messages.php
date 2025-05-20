@@ -7,6 +7,7 @@ return [
     'labels' => 'Labels',
     'login' => 'Login',
     'logout' => 'Logout',
+    'register' => 'Register',
     'hi' => 'Hi from Hexlet!',
     'description' => 'This is a simple Laravel task manager',
     'push_me' => 'Push me',
@@ -23,7 +24,7 @@ return [
     'creation_date' => 'Creation date',
     'actions' => 'Actions',
     'status_changing' => 'Status changing',
-    'success_creation' => 'Status created successfully',
+    'success_create' => 'Status created successfully',
     'success_update' => 'Status changed successfully',
     'success_delete' => 'Status deleted successfully',
 ];

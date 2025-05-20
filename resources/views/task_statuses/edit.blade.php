@@ -6,8 +6,8 @@
         <div class="grid col-span-full">
             <h1 class="mb-5">{{ __('messages.status_changing') }}</h1>
             {{ html()->modelForm($taskStatus, 'PATCH', route('task_statuses.update', $taskStatus))->open() }}
-            @include('task_statuses.form')
-            {{ html()->submit(__('messages.update_status'))->class('block mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
+                @include('task_statuses.form')
+                {{ html()->submit(__('messages.update_status'))->class('block mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
             {{ html()->closeModelForm() }}
         </div>
     </div>

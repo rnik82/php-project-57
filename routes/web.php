@@ -11,7 +11,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('tasks', TaskController::class);
-Route::resource('task_statuses', TaskStatusController::class)->only(['index', 'show']);
+Route::resource('task_statuses', TaskStatusController::class); //->only(['index', 'show']) - так не загружается http://127.0.0.1:8000/task_statuses/create
 Route::resource('labels', LabelController::class);
 
 Route::get('/dashboard', function () {
@@ -23,8 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // сделаем так, чтобы добавлять, редактировать и удалять статусы могли бы только залогиненные пользователи
+    // Статусы
     Route::resource('task_statuses', TaskStatusController::class)->except(['index', 'show']);
+
+    // Метки
+    Route::resource('labels', LabelController::class)->except(['index', 'show']);
+    // Задачи
+    Route::resource('tasks', TaskController::class)->except(['index', 'show']);
 });
 
 require __DIR__.'/auth.php';

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\TaskStatus;
 use Illuminate\Support\Facades\App;
 
-App::setLocale('en');
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        App::setLocale('ru'); // Установка локали при создании контроллера
+    }
     /**
      * Display a listing of the resource.
      */
@@ -23,8 +26,10 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
+        //dd('Test: Controller works!');
+
         $taskStatus = new TaskStatus();
-        return view('task_statuses.create', compact('taskStatus')); // ['status' => $status]
+        return view('task_statuses.create', compact('taskStatus')); // ['taskStatus' => $taskStatus]
     }
 
     /**
