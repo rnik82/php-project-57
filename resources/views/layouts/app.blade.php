@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
-    <title>Менеджер задач</title>
+    <title>{{ __('messages.task_manager') }}</title>
 
     <!-- Scripts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">

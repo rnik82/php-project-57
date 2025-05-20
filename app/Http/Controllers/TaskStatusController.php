@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TaskStatus;
+use Illuminate\Support\Facades\App;
 
+App::setLocale('en');
 class TaskStatusController extends Controller
 {
     /**
@@ -38,7 +40,7 @@ class TaskStatusController extends Controller
         $status->fill($data); // Заполнение статьи данными из формы
         $status->save(); // Save the model to the database. При ошибках сохранения возникнет исключение
         //$status->name = $request->input('name');
-        flash('Статус успешно создан')->success();
+        flash(__('messages.success_create'))->success();
         // Редирект на указанный маршрут
         return redirect()
             ->route('task_statuses.index');
@@ -74,7 +76,7 @@ class TaskStatusController extends Controller
 
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash('Статус успешно изменен')->success();
+        flash(__('messages.success_update'))->success();
         return redirect()
             ->route('task_statuses.index');
     }
@@ -85,7 +87,7 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         $taskStatus->delete();
-        flash("Статус успешно удален")->success();
+        flash(__('messages.success_delete'))->success();
         //dd(session()->all());
         return redirect()
             ->route('task_statuses.index');
