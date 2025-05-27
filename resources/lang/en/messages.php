@@ -27,4 +27,7 @@ return [
     'success_create' => 'Status created successfully',
     'success_update' => 'Status changed successfully',
     'success_delete' => 'Status deleted successfully',
+    'success_task_create' => 'Task created successfully',
+    'success_task_update' => 'Task updated successfully',
+    'success_task_delete' => 'Task deleted successfully',
 ];

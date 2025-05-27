@@ -3,15 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
+use App\Models\TaskStatus;
+use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        App::setLocale('ru');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $tasks = Task::orderBy('id')->paginate(15);
+        $task_statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+
+        return view(
+            'tasks.index',
+            compact('tasks', 'task_statuses', 'users')
+        );
     }
 
     /**
@@ -19,7 +34,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $task = new Task();
+        $task_statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        return view('tasks.create', compact('task', 'task_statuses', 'users'));
     }
 
     /**
@@ -27,38 +45,64 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|unique:tasks|max:255', // возможно помимо name еще нужно будет добавить, но не факт
+            'description' => 'nullable',
+            'status_id' => 'required|exists:task_statuses,id',
+            'created_by_id' => 'required|exists:users,id', // создатель задачи
+            'assignee_id' => 'nullable|exists:users,id', // исполнитель
+        ]);
+        $task = new Task();
+        $task->fill($data);
+        $task->save();
+        flash(__('messages.success_task_create'))->success();
+        // Редирект на указанный маршрут
+        return redirect()
+            ->route('tasks.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        //
+        $task = Task::findOrFail($task);
+        return view('tasks.show', compact('task'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $data = $request->validate([
+            'name' => "required|unique:tasks,name,{$task->id}",
+        ]);
+
+        $task->fill($data);
+        $task->save();
+        flash(__('messages.success_task_update'))->success();
+        return redirect()
+            ->route('tasks.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        flash(__('messages.success_task_delete'))->success();
+        //dd(session()->all());
+        return redirect()
+            ->route('tasks.index');
     }
 }

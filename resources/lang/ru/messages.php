@@ -27,4 +27,7 @@ return [
     'success_create' => 'Статус успешно создан',
     'success_update' => 'Статус успешно изменен',
     'success_delete' => 'Статус успешно удален',
+    'success_task_create' => 'Задача успешно создана',
+    'success_task_update' => 'Задача успешно изменена',
+    'success_task_delete' => 'Задача успешно удалена',
 ];
