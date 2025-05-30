@@ -46,12 +46,16 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:tasks|max:255', // возможно помимо name еще нужно будет добавить, но не факт
+            'name' => 'required|unique:tasks|max:255',
             'description' => 'nullable',
             'status_id' => 'required|exists:task_statuses,id',
-            'created_by_id' => 'required|exists:users,id', // создатель задачи
-            'assignee_id' => 'nullable|exists:users,id', // исполнитель
+            //'created_by_id' - создатель задачи: назначаем текущего пользователя прямо в контроллере
+            'assigned_to_id' => 'nullable|exists:users,id', // исполнитель
         ]);
+
+        // Назначение текущего пользователя как создателя
+        $data['created_by_id'] = auth()->id();
+
         $task = new Task();
         $task->fill($data);
         $task->save();
@@ -66,7 +70,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task = Task::findOrFail($task);
+        $task->load('status');
+        //dd($task);
         return view('tasks.show', compact('task'));
     }
 
@@ -75,7 +80,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('tasks.edit', compact('task'));
+        $task_statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        return view('tasks.edit', compact('task', 'task_statuses', 'users'));
     }
 
     /**
@@ -85,6 +92,9 @@ class TaskController extends Controller
     {
         $data = $request->validate([
             'name' => "required|unique:tasks,name,{$task->id}",
+            'description' => 'nullable',
+            'status_id' => 'required|exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id',
         ]);
 
         $task->fill($data);

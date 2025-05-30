@@ -30,4 +30,5 @@ return [
     'success_task_create' => 'Задача успешно создана',
     'success_task_update' => 'Задача успешно изменена',
     'success_task_delete' => 'Задача успешно удалена',
+    'warning_task_delete' => 'Не удалось удалить статус',
 ];

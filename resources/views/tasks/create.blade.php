@@ -7,6 +7,7 @@
             <h1 class="mb-5">Создать задачу</h1>
             <form class="w-1/3" method="POST" action="{{ route('tasks.store') }}">
                 @csrf
+                @include('tasks.form')
                 <div class="flex flex-col">
                     <div>
                         <label for="name">Имя</label>

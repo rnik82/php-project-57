@@ -30,4 +30,5 @@ return [
     'success_task_create' => 'Task created successfully',
     'success_task_update' => 'Task updated successfully',
     'success_task_delete' => 'Task deleted successfully',
+    'warning_task_delete' => "Couldn't delete status",
 ];

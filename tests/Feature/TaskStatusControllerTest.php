@@ -40,7 +40,7 @@ class TaskStatusControllerTest extends TestCase
         $taskStatus = TaskStatus::first();
         $data = ['name' => 'Updated test task status'];
 
-        $response = $this->put(route('task_statuses.update', $taskStatus->id), $data);
+        $response = $this->put(route('task_statuses.update', $taskStatus), $data);
 
         $response->assertStatus(302);
         $response->assertRedirect(route('task_statuses.index'));
@@ -50,11 +50,11 @@ class TaskStatusControllerTest extends TestCase
 
     public function test_delete_task_status(): void
     {
-        $testStatusId = TaskStatus::first()->id;
-        $response = $this->delete(route('task_statuses.destroy', $testStatusId));
+        $testStatus = TaskStatus::first();
+        $response = $this->delete(route('task_statuses.destroy', $testStatus));
         $response->assertStatus(302);
         $response->assertRedirect(route('task_statuses.index'));
 
-        $this->assertDatabaseMissing('task_statuses', ['id' => $testStatusId]);
+        $this->assertDatabaseMissing('task_statuses', ['id' => $testStatus->id]);
     }
 }

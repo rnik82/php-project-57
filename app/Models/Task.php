@@ -13,4 +13,9 @@ class Task extends Model
         'created_by_id',
         'assigned_to_id',
     ];
+
+    public  function status()
+    {
+        return $this->belongsTo(TaskStatus::class, 'status_id'); // всегда внешний ключ
+    }
 }

@@ -39,7 +39,6 @@ class TaskStatusController extends Controller
             'name' => 'required|unique:task_statuses|max:255',
         ]);
         $status = new TaskStatus();
-        //$name = (array)$request->input('name', []);
         $status->fill($data); // Заполнение статьи данными из формы
         $status->save(); // Save the model to the database. При ошибках сохранения возникнет исключение
         //$status->name = $request->input('name');
@@ -89,6 +88,10 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
+        if ($taskStatus->tasks()->exists()) {
+            flash(__('messages.warning_task_delete'))->success();
+            return redirect()->route('task_statuses.index');
+        }
         $taskStatus->delete();
         flash(__('messages.success_delete'))->success();
         //dd(session()->all());
