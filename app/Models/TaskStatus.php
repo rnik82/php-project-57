@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TaskStatus extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',  // Разрешаем массовое присваивание для этого поля
     ];
