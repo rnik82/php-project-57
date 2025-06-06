@@ -42,7 +42,7 @@ class TaskStatusController extends Controller
         $status->fill($data); // Заполнение статьи данными из формы
         $status->save(); // Save the model to the database. При ошибках сохранения возникнет исключение
         //$status->name = $request->input('name');
-        flash(__('messages.success_create'))->success();
+        flash(__('messages.success_status_create'))->success();
         // Редирект на указанный маршрут
         return redirect()
             ->route('task_statuses.index');
@@ -78,7 +78,7 @@ class TaskStatusController extends Controller
 
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash(__('messages.success_update'))->success();
+        flash(__('messages.success_status_update'))->success();
         return redirect()
             ->route('task_statuses.index');
     }
@@ -89,11 +89,11 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         if ($taskStatus->tasks()->exists()) {
-            flash(__('messages.warning_task_delete'))->success();
+            flash(__('messages.warning_status_delete'))->success();
             return redirect()->route('task_statuses.index');
         }
         $taskStatus->delete();
-        flash(__('messages.success_delete'))->success();
+        flash(__('messages.success_status_delete'))->success();
         //dd(session()->all());
         return redirect()
             ->route('task_statuses.index');

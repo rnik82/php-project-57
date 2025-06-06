@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\TaskStatus;
+use App\Models\Label;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 
@@ -21,6 +22,7 @@ class TaskController extends Controller
     {
         $tasks = Task::orderBy('id')->paginate(15);
         $task_statuses = TaskStatus::pluck('name', 'id');
+        // pluck достаёт из базы только два поля из таблицы users: id и name
         $users = User::pluck('name', 'id');
 
         return view(
@@ -36,8 +38,12 @@ class TaskController extends Controller
     {
         $task = new Task();
         $task_statuses = TaskStatus::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('tasks.create', compact('task', 'task_statuses', 'users'));
+        return view(
+            'tasks.create',
+            compact('task', 'task_statuses', 'users', 'labels')
+        );
     }
 
     /**
@@ -59,6 +65,12 @@ class TaskController extends Controller
         $task = new Task();
         $task->fill($data);
         $task->save();
+
+        // $task->labels() — это вызов отношения many-to-many (многие ко многим), определённого в модели Task
+        // ->sync() — метод Eloquent для синхронизации связей many-to-many
+        // $request->input('labels', []) — это получение из запроса массива выбранных меток
+        $task->labels()->sync($request->input('labels', []));
+
         flash(__('messages.success_task_create'))->success();
         // Редирект на указанный маршрут
         return redirect()
@@ -70,7 +82,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task->load('status');
+        $task->load(['status', 'labels']);
         //dd($task);
         return view('tasks.show', compact('task'));
     }
@@ -82,7 +94,11 @@ class TaskController extends Controller
     {
         $task_statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('tasks.edit', compact('task', 'task_statuses', 'users'));
+        $labels = Label::pluck('name', 'id');
+        return view(
+            'tasks.edit',
+            compact('task', 'task_statuses', 'users', 'labels')
+        );
     }
 
     /**
@@ -95,10 +111,12 @@ class TaskController extends Controller
             'description' => 'nullable',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
+            'labels.*' => 'nullable|exists:labels,id',
         ]);
 
         $task->fill($data);
         $task->save();
+        $task->labels()->sync($request->input('labels', []));
         flash(__('messages.success_task_update'))->success();
         return redirect()
             ->route('tasks.index');

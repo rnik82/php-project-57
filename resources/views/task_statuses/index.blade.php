@@ -32,12 +32,12 @@
                         @auth
                             <td class="align-middle">
                                 <div class="inline-flex items-baseline space-x-1">
-                                    {{ html()->a(route('task_statuses.destroy', $status->id), __('messages.delete_status'))
+                                    {{ html()->a(route('task_statuses.destroy', $status->id), __('messages.delete'))
                                         ->class('text-red-600 hover:text-red-900 ml-2')
                                         ->data('method', 'delete')
                                         ->data('confirm', 'Вы уверены?') }}
 
-                                    {{ html()->a(route('task_statuses.edit', $status->id), __('messages.edit_status'))
+                                    {{ html()->a(route('task_statuses.edit', $status->id), __('messages.edit'))
                                         ->class('text-blue-600 hover:text-blue-900 ml-2') }}
                                 </div>
                             </td>

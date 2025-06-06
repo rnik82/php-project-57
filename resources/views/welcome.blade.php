@@ -8,7 +8,7 @@
                     {{ __('messages.hi') }}
                 </h1>
                 <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    {{ __('messages.description') }}
+                    {{ __('messages.welcome_description') }}
                 </p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                     <a href="https://hexlet.io"

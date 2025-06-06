@@ -45,10 +45,9 @@
                     </div>
                     <div>
                         <select class="rounded border-gray-300 w-full h-32" name="labels[]" id="labels[]" multiple>
-                            <option value="1" selected="selected">ошибка</option>
-                            <option value="2" selected="selected">документация</option>
-                            <option value="3" selected="selected">дубликат</option>
-                            <option value="4" selected="selected">доработка</option>
+                            @foreach($labels as $id => $name))
+                                <option value="{{ $id }}" selected="selected">{{ $name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-2">
