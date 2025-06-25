@@ -12,19 +12,28 @@
                                 <select class="rounded border-gray-300 h-10" name="filter[status_id]" id="filter[status_id]">
                                     <option value selected="selected">Статус</option>
                                     @foreach ($task_statuses as $id => $name)
-                                        <option value="{{ $id }}">{{ $name }}</option>
+                                        <option value="{{ $id }}"
+                                                @if(request('filter.status_id') == $id) selected @endif>
+                                            {{ $name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <select class="rounded border-gray-300 h-10" name="filter[created_by_id]" id="filter[created_by_id]">
                                     <option value selected="selected">Автор</option>
                                     @foreach ($users as $id => $name)
-                                        <option value="{{ $id }}">{{ $name }}</option>
+                                        <option value="{{ $id }}"
+                                                @if(request('filter.created_by_id') == $id) selected @endif>
+                                            {{ $name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <select class="rounded border-gray-300 h-10" name="filter[assigned_to_id]" id="filter[assigned_to_id]">
                                     <option value selected="selected">Исполнитель</option>
                                     @foreach ($users as $id => $name)
-                                        <option value="{{ $id }}">{{ $name }}</option>
+                                        <option value="{{ $id }}"
+                                                @if(request('filter.assigned_to_id') == $id) selected @endif>
+                                            {{ $name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 ml-2" type="submit">
@@ -60,9 +69,8 @@
                             <td>{{ $task->id }}</td>
                             <td>{{ $task_statuses[$task->status_id] ?? '' }}</td>
                             <td>
-                                {{-- нужно будет добавить labels позже --}}
                                 <a class="text-blue-600 hover:text-blue-900"
-                                   href="{{ route('tasks.show', $task) }}"> {{--, $task_statuses[$task->status_id]--}}
+                                   href="{{ route('tasks.show', $task) }}">
                                     {{ $task->name }}
                                 </a>
                             </td>
@@ -89,7 +97,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
                         <div class="flex justify-between flex-1 sm:hidden">
                             <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
@@ -135,7 +143,7 @@
                             </div>
                         </div>
                     </nav>
-                </div>
+                </div> --}}
             </div>
     </section>
 @endsection

@@ -8,6 +8,8 @@ use App\Models\TaskStatus;
 use App\Models\Label;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -20,8 +22,17 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('id')->paginate(15);
+        // $tasks = Task::orderBy('id')->paginate(15);
+        $tasks = QueryBuilder::for(Task::class)
+            ->orderBy('id')
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->get();
         $task_statuses = TaskStatus::pluck('name', 'id');
+
         // pluck достаёт из базы только два поля из таблицы users: id и name
         $users = User::pluck('name', 'id');
 
@@ -83,7 +94,6 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $task->load(['status', 'labels']);
-        //dd($task);
         return view('tasks.show', compact('task'));
     }
 
