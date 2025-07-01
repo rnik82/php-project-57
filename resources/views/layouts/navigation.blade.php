@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        {{ __('messages.task_manager') }}
+                        Менеджер задач
                     </a>
                 </div>
 
@@ -36,8 +36,8 @@
                     </form>
                 @else
                     <div class="space-x-4">
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('messages.logout') }}</a>
-                        <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('messages.registration') }}</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">Вход</a>
+                        <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900">Регистрация</a>
                     </div>
                 @endauth
             </div>
