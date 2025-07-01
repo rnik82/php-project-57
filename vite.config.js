@@ -8,7 +8,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    // base: process.env.APP_ENV === 'production'
-    //     ? '/build/'
-    //     : '/',
+    base: process.env.APP_ENV === 'production'
+        ? '/build/'
+        : '/',
 });
