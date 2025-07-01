@@ -37,8 +37,6 @@ class TaskStatusController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|unique:task_statuses|max:255',
-            ], [
-                'name.unique' => 'Статус с таким именем уже существует',
         ]);
         $status = new TaskStatus();
         $status->fill($data); // Заполнение статьи данными из формы

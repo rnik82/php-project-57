@@ -8,7 +8,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    base: process.env.APP_ENV === 'production'
-        ? '/build/'
-        : '/',
+    server: { // добавил это, так как CSS и JS файлы подключаются по HTTP, а не HTTPS
+        https: true,
+    },
 });
