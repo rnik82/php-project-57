@@ -8,7 +8,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
+    server: { // добавил это, так как CSS и JS файлы подключаются по HTTP, а не HTTPS
         https: true,
     },
 });
