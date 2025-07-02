@@ -36,4 +36,4 @@ Route::resource('task_statuses', TaskStatusController::class)->only(['index']);
 // Метки
 Route::resource('labels', LabelController::class)->only(['index']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

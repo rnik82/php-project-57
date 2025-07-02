@@ -12,6 +12,7 @@ use App\Models\User;
 class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp(); // нужно иначе RefreshDatabase может не сработать
@@ -37,7 +38,7 @@ class TaskControllerTest extends TestCase
         (new Task())->fill($data)->save();
     }
 
-    public function test_create_and_store_task(): void
+    public function testCreateAndStoreTask(): void
     {
         $response = $this->get(route('tasks.create'));
         $response->assertStatus(200);
@@ -67,7 +68,7 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', [...$data, 'created_by_id' => $user->id]);
     }
 
-    public function test_update_task(): void
+    public function testUpdateTask(): void
     {
         $task = Task::first();
 
@@ -94,7 +95,7 @@ class TaskControllerTest extends TestCase
         );
     }
 
-    public function test_show_task(): void
+    public function testShowTask(): void
     {
         $task = Task::first();
         $response = $this->get(route('tasks.show', $task));
@@ -103,7 +104,7 @@ class TaskControllerTest extends TestCase
         $response->assertSee($task->name);
     }
 
-    public function test_delete_task(): void
+    public function testDeleteTask(): void
     {
         $testTask = Task::first();
         $response = $this->delete(route('tasks.destroy', $testTask));

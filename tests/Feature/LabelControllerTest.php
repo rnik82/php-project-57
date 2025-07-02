@@ -11,6 +11,7 @@ use App\Models\User;
 class LabelControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp(); // нужно иначе RefreshDatabase может не сработать
@@ -25,7 +26,7 @@ class LabelControllerTest extends TestCase
         (new Label())->fill($data)->save();
     }
 
-    public function test_create_and_store_label(): void
+    public function testCreateAndStoreLabel(): void
     {
         $response = $this->get(route('labels.create'));
         $response->assertStatus(200);
@@ -42,7 +43,7 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseHas('labels', $data);
     }
 
-    public function test_update_label(): void
+    public function testUpdateLabel(): void
     {
         $label = Label::first();
         $data = ['name' => 'Updated test label name',
@@ -63,7 +64,7 @@ class LabelControllerTest extends TestCase
         );
     }
 
-    public function test_delete_label(): void
+    public function testDeleteLabel(): void
     {
         $label = Label::first();
         $response = $this->delete(route('labels.destroy', $label));

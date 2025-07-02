@@ -11,6 +11,7 @@ use App\Models\User;
 class TaskStatusControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp(); // нужно иначе RefreshDatabase может не сработать
@@ -22,7 +23,7 @@ class TaskStatusControllerTest extends TestCase
         (new TaskStatus())->fill($data)->save();
     }
 
-    public function test_create_and_store_task_status(): void
+    public function testCreateAndStoreTaskStatus(): void
     {
         $response = $this->get(route('task_statuses.create'));
         $response->assertStatus(200);
@@ -35,7 +36,7 @@ class TaskStatusControllerTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
-    public function test_update_task_status(): void
+    public function testUpdateTaskStatus(): void
     {
         $taskStatus = TaskStatus::first();
         $data = ['name' => 'Updated test task status'];
@@ -48,7 +49,7 @@ class TaskStatusControllerTest extends TestCase
         $this->assertDatabaseHas('task_statuses', ['name' => 'Updated test task status']);
     }
 
-    public function test_delete_task_status(): void
+    public function testDeleteTaskStatus(): void
     {
         $testStatus = TaskStatus::first();
         $response = $this->delete(route('task_statuses.destroy', $testStatus));
