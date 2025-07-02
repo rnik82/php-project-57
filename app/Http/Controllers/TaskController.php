@@ -24,12 +24,12 @@ class TaskController extends Controller
     {
         // $tasks = Task::orderBy('id')->paginate(15);
         $tasks = QueryBuilder::for(Task::class)
-            ->orderBy('id')
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
                 AllowedFilter::exact('created_by_id'),
                 AllowedFilter::exact('assigned_to_id'),
             ])
+            ->orderBy('id')
             ->get();
         $task_statuses = TaskStatus::pluck('name', 'id');
 
