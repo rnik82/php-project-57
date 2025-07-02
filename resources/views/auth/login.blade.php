@@ -2,13 +2,33 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    {{-- @include('flash::message')  --}}
+
+    <!-- Validation Errors -->
+    @if (session()->has('flash_notification'))
+        <div class="mb-4">
+            <div class="font-medium text-red-600">
+                Упс! Что-то пошло не так:
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                @foreach(session('flash_notification') as $flash)
+                    <li>{{ $flash['message'] }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full"
+                          type="email"
+                          name="email"
+                          :value="old('email')"
+                          required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -19,6 +39,7 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
+                            :value="old('password')"
                             required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
