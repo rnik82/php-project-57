@@ -11,6 +11,7 @@ return [
     'register' => 'Register',
     'password' => 'Password',
     'wrong_email_and_password' => 'Enter the correct email and password',
+    'password_confirmation_does_not_match' => 'The password field confirmation does not match',
     'remember_me' => 'Remember me',
     'already_registered' => 'Already registered?',
     'enter' => 'Log in',

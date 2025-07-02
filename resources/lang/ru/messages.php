@@ -11,6 +11,7 @@ return [
     'register' => 'Зарегистрировать',
     'password' => 'Пароль',
     'wrong_email_and_password' => 'Введите правильные имя пользователя и пароль',
+    'password_confirmation_does_not_match' => 'Пароль и подтверждение не совпадают',
     'remember_me' => 'Запомнить меня',
     'already_registered' => 'Уже зарегистрированы?',
     'enter' => 'Войти',
