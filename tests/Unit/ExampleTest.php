@@ -9,9 +9,9 @@ class ExampleTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testThatTrueIsTrue(): void
+    public function testStringLength(): void
     {
-        //$this->assertTrue(true);
-        $this->assertSame(2 + 2, 4);
+        $string = 'Hello!';
+        $this->assertSame(6, strlen($string));
     }
 }
