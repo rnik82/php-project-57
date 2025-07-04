@@ -1,6 +1,23 @@
 start:
 	php artisan serve
 
+lint:
+	composer exec --verbose phpcs -- --standard=PSR12 app tests routes
+
+lint-fix:
+	composer exec --verbose phpcbf -- --standard=PSR12 app tests routes
+
+setup:
+	composer install
+	cp -n .env.example .env
+	php artisan key:generate --ansi
+	touch database/database.sqlite
+	php artisan migrate
+	php artisan db:seed
+	npm ci
+	npm run build
+	make ide-helper
+
 install: # команда полезна при первом клонировании репозитория (или после удаления зависимостей)
 	composer install
 
@@ -10,19 +27,17 @@ update: # обновить зависимости
 validate: # проверяет файл composer.json на ошибки
 	composer validate
 
+env:
+	cp -n .env.example .env
+
+- key:
+	php artisan key:generate
+
+db:
+	php artisan migrate:fresh --seed
+
 start-frontend:
 	npm run dev
-
-setup:
-	composer install
-	cp -n .env.example .env
-	php artisan key:gen --ansi
-	touch database/database.sqlite
-	php artisan migrate
-	php artisan db:seed
-	npm ci
-	npm run build
-	make ide-helper
 
 watch:
 	npm run watch
@@ -44,12 +59,6 @@ test-coverage:
 
 deploy:
 	git push heroku
-
-lint:
-	composer exec --verbose phpcs -- --standard=PSR12 app tests routes
-
-lint-fix:
-	composer exec --verbose phpcbf -- --standard=PSR12 app tests routes
 
 compose:
 	docker-compose up
