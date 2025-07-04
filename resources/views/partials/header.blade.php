@@ -6,10 +6,22 @@
             </a>
 
             <div class="flex items-center lg:order-2">
-                @auth()
-                    {{ html()->a(route('logout'), __('messages.logout'))
-                        ->class("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
-                        ->data('method', 'post') }}
+{{--                @auth()--}}
+{{--                    {{ html()->a(route('logout'), __('messages.logout'))--}}
+{{--                        ->class("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")--}}
+{{--                        ->data('method', 'post') }}--}}
+{{--                @endauth--}}
+
+                @auth
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        {{ __('messages.logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                        @csrf
+                    </form>
                 @endauth
 
                 @guest

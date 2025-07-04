@@ -11,7 +11,7 @@
     <title>{{ __('messages.task_manager') }}</title>
 
     <!-- Scripts -->
-    <link
+    {{-- <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
         integrity="sha384-2tERh8OqJZCsnKoCZUhNgnrmZ/fvPpeLh6iwObfbPYAlDmyRPmJBygGE4cG1XK3y"
@@ -39,9 +39,12 @@
         src="https://php-task-manager-ru.hexlet.app/build/assets/app.42df0f0d.js"
         integrity="aC1sLDHLgLiXMuiFeR3M4CmgZTr3l/GH5nBh4jzdmoTW/DbuvXqrHwnMPvJdjRP4"
         crossorigin="anonymous">
-    </script>
+    </script> --}}
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
 

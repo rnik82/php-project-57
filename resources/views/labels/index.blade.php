@@ -17,7 +17,7 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ __('messages.name') }}</th>
-                    <th>{{ __('messages.task_description') }}</th>
+                    <th>{{ __('messages.description') }}</th>
                     <th>{{ __('messages.creation_date') }}</th>
                     @auth
                         <th>{{ __('messages.actions') }}</th>
