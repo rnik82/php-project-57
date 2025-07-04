@@ -17,6 +17,7 @@ WORKDIR /app
 
 COPY . .
 RUN composer install
+RUN php artisan config:cache && php artisan route:clear && php artisan view:clear
 RUN npm ci
 RUN npm run build
 
