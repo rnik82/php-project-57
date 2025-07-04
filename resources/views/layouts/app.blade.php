@@ -7,9 +7,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
-    <!-- Tailwind CSS
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
     <title>{{ __('messages.task_manager') }}</title>
 
