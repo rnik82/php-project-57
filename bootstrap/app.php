@@ -12,10 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-//        $middleware->replace(
-//            \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
-//            \App\Http\Middleware\LogCsrfVerification::class
-//        );
+        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         Integration::handles($exceptions);
