@@ -10,7 +10,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/test-cookie', function() { // тестово добавляем куку
+Route::get('/test-cookie', function () {
+ // тестово добавляем куку
     return response('Cookie test')
         ->cookie('test_lax', '123', 2, '/', null, true, false, 'lax')
         ->cookie('test_none', '456', 2, '/', null, true, false, 'none');
