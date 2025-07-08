@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Автоматически определяет HTTPS на production
+        if (!$this->app->isLocal()) {
+            \URL::forceScheme('https');
+        }
     }
 }
